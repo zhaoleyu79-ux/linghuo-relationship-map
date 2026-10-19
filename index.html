@@ -130,6 +130,13 @@ h3 { font-size: 1.15rem; font-weight: 700; color: var(--text); }
 .tripartite-label { font-size: 11.5px; fill: #7b4fbf; font-weight: 700; }
 .cross { font-size: 26px; font-weight: 700; fill: #c0392b; }
 
+.scenario-sources {
+  font-size: 11.5px; color: var(--text-muted); line-height: 1.7;
+  background: var(--bg-accent); border-left: 3px solid var(--border);
+  border-radius: 0 6px 6px 0; padding: 8px 12px; margin: 0 0 12px;
+}
+.scenario-sources strong { color: var(--text-secondary); font-weight: 700; }
+
 .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; margin: 10px 0 12px; }
 .meta-item { border-bottom: 1px dashed var(--border); padding: 6px 0; font-size: 13px; line-height: 1.55; }
 .meta-item span { display: block; color: var(--text-muted); font-size: 11.5px; letter-spacing: 0.3px; margin-bottom: 1px; }
@@ -242,6 +249,7 @@ tbody td:first-child { font-weight: 700; color: var(--text); white-space: nowrap
 <text x="460" y="170" text-anchor="middle" class="center-title">撮合 / 中介</text>
 <text x="460" y="190" text-anchor="middle" class="center-sub">平台不是合同当事人</text>
 </svg></div>
+  <div class="scenario-sources"><strong>依据</strong>：《民法典》第919、961、963条（委托/中介合同）；《人力资源服务机构管理规定》（人社部令第50号）第5、9条；《新就业形态办法（征求意见稿）》第53条；国务院令第810号、税总2025年第15号公告；《个人所得税法》第9条。</div>
   <div class="meta-grid"><div class="meta-item"><span>法律定性</span><strong>民事中介；非劳动关系</strong></div><div class="meta-item"><span>谁签合同</span><strong>客户 ↔ 零工；平台只签信息服务协议</strong></div><div class="meta-item"><span>谁付款</span><strong>客户 → 零工；客户 → 平台服务费</strong></div><div class="meta-item"><span>谁扣个税</span><strong>客户（支付方）</strong></div><div class="meta-item"><span>谁缴社保</span><strong>无雇主社保；零工可灵活就业自愿参保</strong></div><div class="meta-item"><span>发票</span><strong>平台开服务费发票；零工开票/平台代办</strong></div><div class="meta-item"><span>资质</span><strong>职业中介→人力资源服务许可证；信息发布→备案</strong></div><div class="meta-item"><span>主要风险</span><strong>平台控制过深→转包/派遣；第53条；二清；未扣缴</strong></div></div>
   <div class="insight">平台越像“撮合”，越不能碰钱、碰人、碰考核——否则会被穿透为转包或派遣。</div>
 </article>
@@ -268,6 +276,7 @@ tbody td:first-child { font-weight: 700; color: var(--text); white-space: nowrap
 <text x="460" y="170" text-anchor="middle" class="center-title">转包 / 承揽</text>
 <text x="460" y="190" text-anchor="middle" class="center-sub">平台是合同当事人</text>
 </svg></div>
+  <div class="scenario-sources"><strong>依据</strong>：《民法典》第770、772、779、787条（承揽合同）；《劳动合同法》第94条；《劳务派遣暂行规定》第27条；《新就业形态办法（征求意见稿）》第31、36条；财税〔2016〕47号第三条；《发票管理办法》。</div>
   <div class="meta-grid"><div class="meta-item"><span>法律定性</span><strong>民事承揽/外包；平台可能是雇主或支付方</strong></div><div class="meta-item"><span>谁签合同</span><strong>客户 ↔ 平台（外包/承揽）；平台 ↔ 零工</strong></div><div class="meta-item"><span>谁付款</span><strong>客户 → 平台（全额）；平台 → 零工</strong></div><div class="meta-item"><span>谁扣个税</span><strong>平台（支付方/雇主）</strong></div><div class="meta-item"><span>谁缴社保</span><strong>平台（若雇人）；个体承揽无雇主社保但有穿透风险</strong></div><div class="meta-item"><span>发票</span><strong>平台开全额服务发票；平台取得零工发票/代办</strong></div><div class="meta-item"><span>资质</span><strong>看业务；若实为派遣→派遣许可证</strong></div><div class="meta-item"><span>主要风险</span><strong>假外包真派遣（27条）；94条连带；社保穿透；虚开</strong></div></div>
   <div class="insight">平台是承包方，不等于平台是雇主；但一旦雇人，社保和劳动法义务就来了。</div>
 </article>
@@ -294,6 +303,7 @@ tbody td:first-child { font-weight: 700; color: var(--text); white-space: nowrap
 <text x="460" y="170" text-anchor="middle" class="center-title">劳务派遣</text>
 <text x="460" y="190" text-anchor="middle" class="center-sub">平台是派遣单位 / 雇主</text>
 </svg></div>
+  <div class="scenario-sources"><strong>依据</strong>：《劳动合同法》第57–67、92条；《劳务派遣暂行规定》第3、4、5、27条；《劳务派遣行政许可实施办法》（人社部令第19号）；财税〔2016〕47号第一条；《社会保险法》第10、23、58条。</div>
   <div class="meta-grid"><div class="meta-item"><span>法律定性</span><strong>劳动关系（派遣）</strong></div><div class="meta-item"><span>谁签合同</span><strong>派遣单位 ↔ 零工（劳动合同）；派遣单位 ↔ 客户（派遣协议）</strong></div><div class="meta-item"><span>谁付款</span><strong>客户 → 派遣单位；派遣单位 → 零工</strong></div><div class="meta-item"><span>谁扣个税</span><strong>派遣单位（工资薪金）</strong></div><div class="meta-item"><span>谁缴社保</span><strong>派遣单位</strong></div><div class="meta-item"><span>发票</span><strong>派遣服务发票（差额5%部分不得开专票）</strong></div><div class="meta-item"><span>资质</span><strong>劳务派遣经营许可证</strong></div><div class="meta-item"><span>主要风险</span><strong>10%比例、三性、连带责任、许可</strong></div></div>
   <div class="insight">派遣是最重的模型：平台是雇主，客户是用工单位，两头都跑不掉。</div>
 </article>
@@ -320,6 +330,7 @@ tbody td:first-child { font-weight: 700; color: var(--text); white-space: nowrap
 <text x="460" y="170" text-anchor="middle" class="center-title">平台用工（目标）</text>
 <text x="460" y="190" text-anchor="middle" class="center-sub">非劳动关系的第三类</text>
 </svg></div>
+  <div class="scenario-sources"><strong>依据</strong>：《新就业形态办法（征求意见稿）》第3、31、33、34、36、41、42、53条；《民法典》第770、772、779条；《个人所得税法》第9条；税总2025年第16号公告、第15号公告；国务院令第810号；《社会保险法》第10、23、58条；人社部发〔2025〕24号；《人力资源服务机构管理规定》第5、9条。</div>
   <div class="meta-grid"><div class="meta-item"><span>法律定性</span><strong>非劳动关系的平台用工（第三类）</strong></div><div class="meta-item"><span>谁签合同</span><strong>平台 ↔ 零工（书面用工协议）；客户 ↔ 平台（合作协议）</strong></div><div class="meta-item"><span>谁付款</span><strong>客户 → 平台（服务费）；平台 → 零工（任务包报酬）</strong></div><div class="meta-item"><span>谁扣个税</span><strong>平台（劳务报酬；16号公告）</strong></div><div class="meta-item"><span>谁缴社保</span><strong>无雇主社保；职业伤害保障；零工可灵活就业自愿参保</strong></div><div class="meta-item"><span>发票</span><strong>平台开平台服务发票；平台按16号公告代办/零工开票</strong></div><div class="meta-item"><span>资质</span><strong>人力资源服务许可/备案；网络招聘→电信许可</strong></div><div class="meta-item"><span>主要风险</span><strong>客户管人→共同管理/派遣；平台支配→劳动关系；第36条；22号公告</strong></div></div>
   <div class="insight">平台不是雇主，但平台是书面用工协议的一方；平台义务不是雇主义务，但不能省。</div>
 </article>
@@ -346,6 +357,7 @@ tbody td:first-child { font-weight: 700; color: var(--text); white-space: nowrap
 <text x="460" y="170" text-anchor="middle" class="center-title">共同管理（风险变体）</text>
 <text x="460" y="190" text-anchor="middle" class="center-sub">三方书面用工协议</text>
 </svg></div>
+  <div class="scenario-sources"><strong>依据</strong>：《新就业形态办法（征求意见稿）》第31条第3款、第34、36、41、42条；《民法典》第770、772、779条；《劳动合同法》第94条；法释〔2025〕12号第3条；《劳务派遣暂行规定》第27条。</div>
   <div class="meta-grid"><div class="meta-item"><span>法律定性</span><strong>非劳动关系，但共同管理</strong></div><div class="meta-item"><span>谁签合同</span><strong>平台 + 客户 + 零工（三方书面用工协议）</strong></div><div class="meta-item"><span>谁付款</span><strong>客户 → 平台；平台 → 零工</strong></div><div class="meta-item"><span>谁扣个税</span><strong>平台（劳务报酬）</strong></div><div class="meta-item"><span>谁缴社保</span><strong>无雇主社保；职业伤害保障</strong></div><div class="meta-item"><span>发票</span><strong>平台开服务发票</strong></div><div class="meta-item"><span>资质</span><strong>平台 + 合作企业资质审核（第34条）</strong></div><div class="meta-item"><span>主要风险</span><strong>共同被告（第41条）；连带；第34条监督责任；第36条穿透</strong></div></div>
   <div class="insight">三方协议不是“三方免责”；它是共同管理的自认，能用两方协议就不要用三方。</div>
 </article>

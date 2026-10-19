@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>平台用工关系图｜薪藩专题解析</title>
+<style>
+:root {
+  --bg: #fdfcf9;
+  --bg-card: #ffffff;
+  --bg-accent: #f8f6f0;
+  --text: #2c2c2c;
+  --text-secondary: #5a5a5a;
+  --text-muted: #8a8a8a;
+  --border: #e0dcd5;
+  --accent: #d4410b;
+  --accent-soft: #fef3ee;
+  --blue: #1a6fb5;
+  --blue-soft: #eef6fc;
+  --green: #2d7d46;
+  --green-soft: #edf7f0;
+  --purple: #7b4fbf;
+  --purple-soft: #f5f0fc;
+  --orange: #e07b30;
+  --orange-soft: #fef7f0;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --radius: 8px;
+  --font: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", system-ui, -apple-system, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font); background: var(--bg); color: var(--text);
+  line-height: 1.8; font-size: 16px; -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { color: var(--text); font-weight: 700; }
+
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(253,252,249,0.92);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px; display: flex; align-items: center; justify-content: space-between;
+  height: 52px; backdrop-filter: blur(12px);
+}
+.topbar .logo { font-weight: 700; font-size: 14px; color: var(--accent); letter-spacing: 0.5px; }
+.topbar .meta { font-size: 13px; color: var(--text-muted); }
+
+.cover {
+  text-align: center; padding: 52px 20px 36px;
+  border-bottom: 1px solid var(--border); margin-bottom: 28px;
+}
+.cover .badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  font-size: 13px; font-weight: 600; padding: 4px 14px; border-radius: 20px;
+  margin-bottom: 14px; letter-spacing: 0.5px;
+}
+.cover h1 { font-size: 2rem; font-weight: 800; line-height: 1.35; margin-bottom: 10px; letter-spacing: 0.3px; }
+.cover .subtitle { font-size: 15px; color: var(--text-secondary); line-height: 1.7; max-width: 680px; margin: 0 auto; }
+.cover .tags { margin-top: 18px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.cover .tags span { font-size: 12px; color: var(--text-muted); background: var(--bg-accent); padding: 3px 10px; border-radius: 12px; }
+
+.insight {
+  background: var(--accent-soft); border: 1px solid #f5d5c5;
+  border-radius: var(--radius); padding: 16px 22px; margin: 18px 0;
+  font-weight: 600; font-size: 15px; text-align: center; color: #9b2f06;
+}
+.legend {
+  display: flex; flex-wrap: wrap; gap: 12px 22px; justify-content: center;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 14px 20px; margin: 18px 0 8px; box-shadow: var(--shadow);
+}
+.legend-item { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--text-secondary); }
+.legend-line { display: inline-block; width: 34px; height: 0; border-top: 2.5px solid #2c2c2c; }
+.line-money { border-top: 2.5px dashed #2d7d46; }
+.line-invoice { border-top: 2.5px dotted #e07b30; }
+.line-management { border-top: 2.5px solid #c0392b; }
+.line-tax { border-top: 2.5px dashed #7b4fbf; }
+.line-none { border-top: 2.5px dotted #8a8a8a; }
+
+h2 {
+  font-size: 1.5rem; font-weight: 700; margin: 48px 0 12px;
+  padding-bottom: 10px; border-bottom: 2px solid var(--accent);
+  color: var(--text); letter-spacing: 0.3px;
+}
+h3 { font-size: 1.15rem; font-weight: 700; color: var(--text); }
+
+.scenario-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; box-shadow: var(--shadow);
+  padding: 24px 26px 20px; margin: 24px 0; break-inside: avoid;
+}
+.scenario-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 2px; }
+.scenario-num {
+  background: var(--accent-soft); color: var(--accent);
+  font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 12px;
+  letter-spacing: 0.5px; white-space: nowrap;
+}
+.scenario-head h3 { margin: 0; font-size: 1.1rem; }
+.scenario-tag {
+  font-size: 11.5px; color: var(--text-muted); background: var(--bg-accent);
+  padding: 3px 10px; border-radius: 12px; white-space: nowrap;
+}
+.diagram-wrap {
+  background: #fff; border: 1px solid var(--border); border-radius: 10px;
+  padding: 6px 4px; margin: 10px 0 12px; overflow-x: auto;
+}
+.diagram { width: 100%; min-width: 780px; height: auto; display: block; }
+.diagram text { font-family: var(--font); }
+.box-platform { fill: #eef6fc; stroke: #1a6fb5; stroke-width: 2; }
+.box-client { fill: #edf7f0; stroke: #2d7d46; stroke-width: 2; }
+.box-worker { fill: #fef7f0; stroke: #e07b30; stroke-width: 2; }
+.box-title { font-size: 15px; font-weight: 700; fill: #2c2c2c; }
+.box-sub { font-size: 11.5px; fill: #5a5a5a; }
+.edge-contract { stroke: #2c2c2c; stroke-width: 2.2; fill: none; }
+.edge-money { stroke: #2d7d46; stroke-width: 2; stroke-dasharray: 7 5; fill: none; }
+.edge-invoice { stroke: #e07b30; stroke-width: 2; stroke-dasharray: 2 5; fill: none; }
+.edge-management { stroke: #c0392b; stroke-width: 2.4; fill: none; }
+.edge-tax { stroke: #7b4fbf; stroke-width: 2; stroke-dasharray: 5 4; fill: none; }
+.edge-none { stroke: #8a8a8a; stroke-width: 2; stroke-dasharray: 3 6; fill: none; }
+.edge-label { font-size: 11.5px; fill: #5a5a5a; }
+.edge-label-strong { font-size: 11.5px; font-weight: 700; fill: #2c2c2c; }
+.center-badge { fill: #fffaf5; stroke: #d4410b; stroke-width: 1.2; }
+.center-title { font-size: 13px; font-weight: 700; fill: #9b2f06; }
+.center-sub { font-size: 10.5px; fill: #8a5a45; }
+.tripartite { fill: none; stroke: #7b4fbf; stroke-width: 2; stroke-dasharray: 8 6; opacity: 0.65; }
+.tripartite-label { font-size: 11.5px; fill: #7b4fbf; font-weight: 700; }
+.cross { font-size: 26px; font-weight: 700; fill: #c0392b; }
+
+.meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; margin: 10px 0 12px; }
+.meta-item { border-bottom: 1px dashed var(--border); padding: 6px 0; font-size: 13px; line-height: 1.55; }
+.meta-item span { display: block; color: var(--text-muted); font-size: 11.5px; letter-spacing: 0.3px; margin-bottom: 1px; }
+.meta-item strong { font-weight: 600; color: var(--text); }
+
+.table-wrap {
+  overflow-x: auto; margin: 18px 0;
+  border-radius: var(--radius); border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 1100px; }
+thead th {
+  background: var(--bg-accent); font-weight: 700; font-size: 12.5px;
+  text-align: left; padding: 11px 12px; border-bottom: 2px solid var(--border);
+  white-space: nowrap; color: var(--text-secondary); letter-spacing: 0.3px;
+}
+tbody td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.6; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: #fefdfb; }
+tbody td:first-child { font-weight: 700; color: var(--text); white-space: nowrap; }
+
+.summary {
+  background: var(--green-soft); border: 1px solid #c8e0cf;
+  border-radius: var(--radius); padding: 26px 30px; margin: 36px 0;
+}
+.summary h2 { border-bottom-color: var(--green); margin-top: 0; }
+.summary ol { padding-left: 20px; }
+.summary ol li { margin: 9px 0; font-size: 14.5px; line-height: 1.7; }
+
+.sources {
+  font-size: 13px; color: var(--text-muted); margin-top: 12px;
+  padding: 14px 18px; background: var(--bg-accent); border-radius: var(--radius);
+  line-height: 1.8;
+}
+.sources a { color: var(--text-muted); text-decoration: underline; }
+
+@media (max-width: 768px) {
+  .container { padding: 20px 16px 60px; }
+  .cover h1 { font-size: 1.5rem; }
+  .meta-grid { grid-template-columns: 1fr; }
+  .diagram { min-width: 720px; }
+  .scenario-card { padding: 18px 16px; }
+  h2 { font-size: 1.3rem; }
+}
+@media print {
+  .topbar { position: static; }
+  body { font-size: 13px; line-height: 1.6; }
+  .container { max-width: 100%; padding: 0; }
+  .scenario-card { break-inside: avoid; box-shadow: none; }
+  .diagram-wrap { overflow: visible; }
+  .diagram { min-width: 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="logo">薪藩 · 专题解析</span>
+  <span class="meta">2026-10-19 · v1.0 · 内部研究稿</span>
+</div>
+
+<div class="container">
+
+  <div class="cover">
+    <div class="badge">平台用工 · 关系图</div>
+    <h1>平台用工关系图</h1>
+    <p class="subtitle">五种合作方式：谁签合同、谁付款、谁扣税、谁管人。<br>同一套角色，换一条线，法律性质和税负就完全不同。</p>
+    <div class="tags">
+      <span>5 个场景</span>
+      <span>合同 / 资金 / 发票 / 管理</span>
+      <span>可直接截图进 PPT</span>
+    </div>
+  </div>
+
+  <div class="insight">
+    核心判断：不是看协议叫什么，而是看“谁签合同、钱从谁到谁、票怎么开、谁在管人”。四条线一致，模型才成立。
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><span class="legend-line"></span>合同 / 协议</div>
+    <div class="legend-item"><span class="legend-line line-money"></span>资金流</div>
+    <div class="legend-item"><span class="legend-line line-invoice"></span>发票 / 服务费</div>
+    <div class="legend-item"><span class="legend-line line-management"></span>劳动管理</div>
+    <div class="legend-item"><span class="legend-line line-tax"></span>税务扣缴 / 申报</div>
+    <div class="legend-item"><span class="legend-line line-none"></span>无合同 / 无管理</div>
+  </div>
+
+  <h2 id="scenes">五种场景</h2>
+
+  <article class="scenario-card" id="s1">
+  <div class="scenario-head">
+    <span class="scenario-num">场景 1</span>
+    <h3>撮合/中介：平台只做媒，不做当事人</h3>
+    <span class="scenario-tag">民事中介 · 非劳动关系</span>
+  </div>
+  <div class="diagram-wrap"><svg viewBox="0 0 920 360" class="diagram" role="img" aria-label="撮合模式关系图：客户与零工直接签合同、直接付款，平台只提供信息撮合并收取服务费">
+<defs><marker id="arrow-dark-s1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2c2c2c"/></marker><marker id="arrow-green-s1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2d7d46"/></marker><marker id="arrow-orange-s1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#e07b30"/></marker><marker id="arrow-red-s1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#c0392b"/></marker><marker id="arrow-purple-s1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#7b4fbf"/></marker><marker id="arrow-gray-s1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#8a8a8a"/></marker></defs>
+
+<rect x="360" y="20" width="200" height="64" rx="10" class="box-platform"/>
+<text x="460" y="46" text-anchor="middle" class="box-title">平台企业（薪藩）</text>
+<text x="460" y="66" text-anchor="middle" class="box-sub">信息撮合 / 技术服务</text>
+<rect x="60" y="260" width="200" height="64" rx="10" class="box-client"/>
+<text x="160" y="286" text-anchor="middle" class="box-title">客户</text>
+<text x="160" y="306" text-anchor="middle" class="box-sub">雇主 / 付款方</text>
+<rect x="660" y="260" width="200" height="64" rx="10" class="box-worker"/>
+<text x="760" y="286" text-anchor="middle" class="box-title">零工</text>
+<text x="760" y="306" text-anchor="middle" class="box-sub">与企业直接签约</text>
+<path d="M 250 260 L 370 84" class="edge-invoice" marker-end="url(#arrow-orange-s1)"/><text x="285" y="165" text-anchor="middle" class="edge-label"><tspan x="285" dy="0">服务费 / 发票</tspan></text><path d="M 550 84 L 670 260" class="edge-none" marker-end="url(#arrow-gray-s1)"/><text x="640" y="165" text-anchor="middle" class="edge-label"><tspan x="640" dy="0">仅匹配</tspan><tspan x="640" dy="15">不签合同</tspan></text><path d="M 260 278 L 660 278" class="edge-contract" marker-end="url(#arrow-dark-s1)"/><text x="460" y="268" text-anchor="middle" class="edge-label"><tspan x="460" dy="0">服务/劳务合同</tspan></text><path d="M 660 306 L 260 306" class="edge-money" marker-end="url(#arrow-green-s1)"/><text x="460" y="326" text-anchor="middle" class="edge-label"><tspan x="460" dy="0">报酬支付</tspan></text>
+<rect x="360" y="148" width="200" height="58" rx="12" class="center-badge"/>
+<text x="460" y="170" text-anchor="middle" class="center-title">撮合 / 中介</text>
+<text x="460" y="190" text-anchor="middle" class="center-sub">平台不是合同当事人</text>
+</svg></div>
+  <div class="meta-grid"><div class="meta-item"><span>法律定性</span><strong>民事中介；非劳动关系</strong></div><div class="meta-item"><span>谁签合同</span><strong>客户 ↔ 零工；平台只签信息服务协议</strong></div><div class="meta-item"><span>谁付款</span><strong>客户 → 零工；客户 → 平台服务费</strong></div><div class="meta-item"><span>谁扣个税</span><strong>客户（支付方）</strong></div><div class="meta-item"><span>谁缴社保</span><strong>无雇主社保；零工可灵活就业自愿参保</strong></div><div class="meta-item"><span>发票</span><strong>平台开服务费发票；零工开票/平台代办</strong></div><div class="meta-item"><span>资质</span><strong>职业中介→人力资源服务许可证；信息发布→备案</strong></div><div class="meta-item"><span>主要风险</span><strong>平台控制过深→转包/派遣；第53条；二清；未扣缴</strong></div></div>
+  <div class="insight">平台越像“撮合”，越不能碰钱、碰人、碰考核——否则会被穿透为转包或派遣。</div>
+</article>
+<article class="scenario-card" id="s2">
+  <div class="scenario-head">
+    <span class="scenario-num">场景 2</span>
+    <h3>转包/承揽：平台是承包方，但不一定是雇主</h3>
+    <span class="scenario-tag">民事承揽/外包 · 平台是合同当事人</span>
+  </div>
+  <div class="diagram-wrap"><svg viewBox="0 0 920 360" class="diagram" role="img" aria-label="转包模式关系图：客户与平台签外包合同并支付全款，平台与零工签协议并支付报酬、扣缴个税">
+<defs><marker id="arrow-dark-s2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2c2c2c"/></marker><marker id="arrow-green-s2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2d7d46"/></marker><marker id="arrow-orange-s2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#e07b30"/></marker><marker id="arrow-red-s2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#c0392b"/></marker><marker id="arrow-purple-s2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#7b4fbf"/></marker><marker id="arrow-gray-s2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#8a8a8a"/></marker></defs>
+<text x="460" y="304" text-anchor="middle" class="cross">×</text>
+<rect x="360" y="20" width="200" height="64" rx="10" class="box-platform"/>
+<text x="460" y="46" text-anchor="middle" class="box-title">平台企业（薪藩）</text>
+<text x="460" y="66" text-anchor="middle" class="box-sub">承包方 / 支付方</text>
+<rect x="60" y="260" width="200" height="64" rx="10" class="box-client"/>
+<text x="160" y="286" text-anchor="middle" class="box-title">客户</text>
+<text x="160" y="306" text-anchor="middle" class="box-sub">发包方</text>
+<rect x="660" y="260" width="200" height="64" rx="10" class="box-worker"/>
+<text x="760" y="286" text-anchor="middle" class="box-title">零工</text>
+<text x="760" y="306" text-anchor="middle" class="box-sub">承揽人 / 劳动者</text>
+<path d="M 245 264 L 365 88" class="edge-contract" marker-end="url(#arrow-dark-s2)"/><text x="280" y="155" text-anchor="middle" class="edge-label"><tspan x="280" dy="0">外包/承揽合同</tspan><tspan x="280" dy="15">服务费 + 全额发票</tspan></text><path d="M 550 84 L 670 260" class="edge-contract" marker-end="url(#arrow-dark-s2)"/><text x="640" y="155" text-anchor="middle" class="edge-label"><tspan x="640" dy="0">劳动/劳务/承揽协议</tspan><tspan x="640" dy="15">报酬 + 个税扣缴</tspan></text><path d="M 540 88 L 660 264" class="edge-tax" marker-end="url(#arrow-purple-s2)"/><text x="600" y="205" text-anchor="middle" class="edge-label"><tspan x="600" dy="0">个税扣缴</tspan></text><path d="M 260 292 L 660 292" class="edge-none" marker-end="url(#arrow-gray-s2)"/><text x="460" y="282" text-anchor="middle" class="edge-label"><tspan x="460" dy="0">客户不直接管人</tspan></text>
+<rect x="360" y="148" width="200" height="58" rx="12" class="center-badge"/>
+<text x="460" y="170" text-anchor="middle" class="center-title">转包 / 承揽</text>
+<text x="460" y="190" text-anchor="middle" class="center-sub">平台是合同当事人</text>
+</svg></div>
+  <div class="meta-grid"><div class="meta-item"><span>法律定性</span><strong>民事承揽/外包；平台可能是雇主或支付方</strong></div><div class="meta-item"><span>谁签合同</span><strong>客户 ↔ 平台（外包/承揽）；平台 ↔ 零工</strong></div><div class="meta-item"><span>谁付款</span><strong>客户 → 平台（全额）；平台 → 零工</strong></div><div class="meta-item"><span>谁扣个税</span><strong>平台（支付方/雇主）</strong></div><div class="meta-item"><span>谁缴社保</span><strong>平台（若雇人）；个体承揽无雇主社保但有穿透风险</strong></div><div class="meta-item"><span>发票</span><strong>平台开全额服务发票；平台取得零工发票/代办</strong></div><div class="meta-item"><span>资质</span><strong>看业务；若实为派遣→派遣许可证</strong></div><div class="meta-item"><span>主要风险</span><strong>假外包真派遣（27条）；94条连带；社保穿透；虚开</strong></div></div>
+  <div class="insight">平台是承包方，不等于平台是雇主；但一旦雇人，社保和劳动法义务就来了。</div>
+</article>
+<article class="scenario-card" id="s3">
+  <div class="scenario-head">
+    <span class="scenario-num">场景 3</span>
+    <h3>劳务派遣：平台是派遣单位，客户是用工单位</h3>
+    <span class="scenario-tag">劳动关系 · 平台是雇主</span>
+  </div>
+  <div class="diagram-wrap"><svg viewBox="0 0 920 360" class="diagram" role="img" aria-label="劳务派遣关系图：平台与零工签劳动合同、发工资缴社保，客户对零工实施劳动管理">
+<defs><marker id="arrow-dark-s3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2c2c2c"/></marker><marker id="arrow-green-s3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2d7d46"/></marker><marker id="arrow-orange-s3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#e07b30"/></marker><marker id="arrow-red-s3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#c0392b"/></marker><marker id="arrow-purple-s3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#7b4fbf"/></marker><marker id="arrow-gray-s3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#8a8a8a"/></marker></defs>
+
+<rect x="360" y="20" width="200" height="64" rx="10" class="box-platform"/>
+<text x="460" y="46" text-anchor="middle" class="box-title">平台企业（薪藩）</text>
+<text x="460" y="66" text-anchor="middle" class="box-sub">派遣单位 / 雇主</text>
+<rect x="60" y="260" width="200" height="64" rx="10" class="box-client"/>
+<text x="160" y="286" text-anchor="middle" class="box-title">客户</text>
+<text x="160" y="306" text-anchor="middle" class="box-sub">用工单位</text>
+<rect x="660" y="260" width="200" height="64" rx="10" class="box-worker"/>
+<text x="760" y="286" text-anchor="middle" class="box-title">零工</text>
+<text x="760" y="306" text-anchor="middle" class="box-sub">被派遣劳动者</text>
+<path d="M 245 264 L 365 88" class="edge-contract" marker-end="url(#arrow-dark-s3)"/><text x="280" y="155" text-anchor="middle" class="edge-label"><tspan x="280" dy="0">派遣协议</tspan><tspan x="280" dy="15">服务费 + 派遣发票</tspan></text><path d="M 550 84 L 670 260" class="edge-contract" marker-end="url(#arrow-dark-s3)"/><text x="640" y="155" text-anchor="middle" class="edge-label"><tspan x="640" dy="0">劳动合同</tspan><tspan x="640" dy="15">工资 + 社保/个税</tspan></text><path d="M 540 88 L 660 264" class="edge-tax" marker-end="url(#arrow-purple-s3)"/><text x="600" y="205" text-anchor="middle" class="edge-label"><tspan x="600" dy="0">社保 / 个税</tspan></text><path d="M 260 292 L 660 292" class="edge-management" marker-end="url(#arrow-red-s3)"/><text x="460" y="282" text-anchor="middle" class="edge-label"><tspan x="460" dy="0">劳动管理 / 指挥</tspan></text>
+<rect x="360" y="148" width="200" height="58" rx="12" class="center-badge"/>
+<text x="460" y="170" text-anchor="middle" class="center-title">劳务派遣</text>
+<text x="460" y="190" text-anchor="middle" class="center-sub">平台是派遣单位 / 雇主</text>
+</svg></div>
+  <div class="meta-grid"><div class="meta-item"><span>法律定性</span><strong>劳动关系（派遣）</strong></div><div class="meta-item"><span>谁签合同</span><strong>派遣单位 ↔ 零工（劳动合同）；派遣单位 ↔ 客户（派遣协议）</strong></div><div class="meta-item"><span>谁付款</span><strong>客户 → 派遣单位；派遣单位 → 零工</strong></div><div class="meta-item"><span>谁扣个税</span><strong>派遣单位（工资薪金）</strong></div><div class="meta-item"><span>谁缴社保</span><strong>派遣单位</strong></div><div class="meta-item"><span>发票</span><strong>派遣服务发票（差额5%部分不得开专票）</strong></div><div class="meta-item"><span>资质</span><strong>劳务派遣经营许可证</strong></div><div class="meta-item"><span>主要风险</span><strong>10%比例、三性、连带责任、许可</strong></div></div>
+  <div class="insight">派遣是最重的模型：平台是雇主，客户是用工单位，两头都跑不掉。</div>
+</article>
+<article class="scenario-card" id="s4">
+  <div class="scenario-head">
+    <span class="scenario-num">场景 4</span>
+    <h3>平台用工（目标）：平台不是雇主，客户不是雇主</h3>
+    <span class="scenario-tag">非劳动关系 · 第三类平台用工</span>
+  </div>
+  <div class="diagram-wrap"><svg viewBox="0 0 920 360" class="diagram" role="img" aria-label="平台用工目标模型关系图：客户与平台签合作协议，平台与零工签书面用工协议并支付任务包报酬，客户不签合同不管人">
+<defs><marker id="arrow-dark-s4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2c2c2c"/></marker><marker id="arrow-green-s4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2d7d46"/></marker><marker id="arrow-orange-s4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#e07b30"/></marker><marker id="arrow-red-s4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#c0392b"/></marker><marker id="arrow-purple-s4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#7b4fbf"/></marker><marker id="arrow-gray-s4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#8a8a8a"/></marker></defs>
+<text x="460" y="304" text-anchor="middle" class="cross">×</text>
+<rect x="360" y="20" width="200" height="64" rx="10" class="box-platform"/>
+<text x="460" y="46" text-anchor="middle" class="box-title">平台企业（薪藩）</text>
+<text x="460" y="66" text-anchor="middle" class="box-sub">平台企业 / 非雇主</text>
+<rect x="60" y="260" width="200" height="64" rx="10" class="box-client"/>
+<text x="160" y="286" text-anchor="middle" class="box-title">客户</text>
+<text x="160" y="306" text-anchor="middle" class="box-sub">平台用工合作企业</text>
+<rect x="660" y="260" width="200" height="64" rx="10" class="box-worker"/>
+<text x="760" y="286" text-anchor="middle" class="box-title">零工</text>
+<text x="760" y="306" text-anchor="middle" class="box-sub">新就业形态劳动者</text>
+<path d="M 245 264 L 365 88" class="edge-contract" marker-end="url(#arrow-dark-s4)"/><text x="280" y="155" text-anchor="middle" class="edge-label"><tspan x="280" dy="0">合作协议</tspan><tspan x="280" dy="15">服务费 + 平台发票</tspan></text><path d="M 550 84 L 670 260" class="edge-contract" marker-end="url(#arrow-dark-s4)"/><text x="640" y="155" text-anchor="middle" class="edge-label"><tspan x="640" dy="0">书面用工协议</tspan><tspan x="640" dy="15">任务包报酬 + 扣缴/代办</tspan></text><path d="M 540 88 L 660 264" class="edge-tax" marker-end="url(#arrow-purple-s4)"/><text x="600" y="205" text-anchor="middle" class="edge-label"><tspan x="600" dy="0">扣缴 / 代办</tspan></text><path d="M 260 292 L 660 292" class="edge-none" marker-end="url(#arrow-gray-s4)"/><text x="460" y="278" text-anchor="middle" class="edge-label"><tspan x="460" dy="0">不签合同 / 不指挥 / 不考勤 / 不奖惩</tspan></text>
+<rect x="360" y="148" width="200" height="58" rx="12" class="center-badge"/>
+<text x="460" y="170" text-anchor="middle" class="center-title">平台用工（目标）</text>
+<text x="460" y="190" text-anchor="middle" class="center-sub">非劳动关系的第三类</text>
+</svg></div>
+  <div class="meta-grid"><div class="meta-item"><span>法律定性</span><strong>非劳动关系的平台用工（第三类）</strong></div><div class="meta-item"><span>谁签合同</span><strong>平台 ↔ 零工（书面用工协议）；客户 ↔ 平台（合作协议）</strong></div><div class="meta-item"><span>谁付款</span><strong>客户 → 平台（服务费）；平台 → 零工（任务包报酬）</strong></div><div class="meta-item"><span>谁扣个税</span><strong>平台（劳务报酬；16号公告）</strong></div><div class="meta-item"><span>谁缴社保</span><strong>无雇主社保；职业伤害保障；零工可灵活就业自愿参保</strong></div><div class="meta-item"><span>发票</span><strong>平台开平台服务发票；平台按16号公告代办/零工开票</strong></div><div class="meta-item"><span>资质</span><strong>人力资源服务许可/备案；网络招聘→电信许可</strong></div><div class="meta-item"><span>主要风险</span><strong>客户管人→共同管理/派遣；平台支配→劳动关系；第36条；22号公告</strong></div></div>
+  <div class="insight">平台不是雇主，但平台是书面用工协议的一方；平台义务不是雇主义务，但不能省。</div>
+</article>
+<article class="scenario-card" id="s5">
+  <div class="scenario-head">
+    <span class="scenario-num">场景 5</span>
+    <h3>共同管理（风险变体）：三方协议不是免责协议</h3>
+    <span class="scenario-tag">三方书面用工协议 · 共同责任</span>
+  </div>
+  <div class="diagram-wrap"><svg viewBox="0 0 920 360" class="diagram" role="img" aria-label="共同管理模式关系图：平台与客户共同管理零工，签三方书面用工协议，存在共同被告和连带风险">
+<defs><marker id="arrow-dark-s5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2c2c2c"/></marker><marker id="arrow-green-s5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2d7d46"/></marker><marker id="arrow-orange-s5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#e07b30"/></marker><marker id="arrow-red-s5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#c0392b"/></marker><marker id="arrow-purple-s5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#7b4fbf"/></marker><marker id="arrow-gray-s5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#8a8a8a"/></marker></defs>
+<polygon points="160,260 460,84 760,260" class="tripartite"/><text x="460" y="132" text-anchor="middle" class="tripartite-label">三方书面用工协议</text>
+<rect x="360" y="20" width="200" height="64" rx="10" class="box-platform"/>
+<text x="460" y="46" text-anchor="middle" class="box-title">平台企业（薪藩）</text>
+<text x="460" y="66" text-anchor="middle" class="box-sub">平台企业 / 共同管理</text>
+<rect x="60" y="260" width="200" height="64" rx="10" class="box-client"/>
+<text x="160" y="286" text-anchor="middle" class="box-title">客户</text>
+<text x="160" y="306" text-anchor="middle" class="box-sub">平台用工合作企业 / 共同管理</text>
+<rect x="660" y="260" width="200" height="64" rx="10" class="box-worker"/>
+<text x="760" y="286" text-anchor="middle" class="box-title">零工</text>
+<text x="760" y="306" text-anchor="middle" class="box-sub">新就业形态劳动者</text>
+<path d="M 245 264 L 365 88" class="edge-contract" marker-end="url(#arrow-dark-s5)"/><text x="285" y="165" text-anchor="middle" class="edge-label"><tspan x="285" dy="0">合作协议</tspan></text><path d="M 550 84 L 670 260" class="edge-management" marker-end="url(#arrow-red-s5)"/><text x="640" y="165" text-anchor="middle" class="edge-label"><tspan x="640" dy="0">平台规则 / 管理</tspan></text><path d="M 540 88 L 660 264" class="edge-tax" marker-end="url(#arrow-purple-s5)"/><text x="600" y="205" text-anchor="middle" class="edge-label"><tspan x="600" dy="0">扣缴</tspan></text><path d="M 260 292 L 660 292" class="edge-management" marker-end="url(#arrow-red-s5)"/><text x="460" y="282" text-anchor="middle" class="edge-label"><tspan x="460" dy="0">共同劳动管理</tspan></text>
+<rect x="360" y="148" width="200" height="58" rx="12" class="center-badge"/>
+<text x="460" y="170" text-anchor="middle" class="center-title">共同管理（风险变体）</text>
+<text x="460" y="190" text-anchor="middle" class="center-sub">三方书面用工协议</text>
+</svg></div>
+  <div class="meta-grid"><div class="meta-item"><span>法律定性</span><strong>非劳动关系，但共同管理</strong></div><div class="meta-item"><span>谁签合同</span><strong>平台 + 客户 + 零工（三方书面用工协议）</strong></div><div class="meta-item"><span>谁付款</span><strong>客户 → 平台；平台 → 零工</strong></div><div class="meta-item"><span>谁扣个税</span><strong>平台（劳务报酬）</strong></div><div class="meta-item"><span>谁缴社保</span><strong>无雇主社保；职业伤害保障</strong></div><div class="meta-item"><span>发票</span><strong>平台开服务发票</strong></div><div class="meta-item"><span>资质</span><strong>平台 + 合作企业资质审核（第34条）</strong></div><div class="meta-item"><span>主要风险</span><strong>共同被告（第41条）；连带；第34条监督责任；第36条穿透</strong></div></div>
+  <div class="insight">三方协议不是“三方免责”；它是共同管理的自认，能用两方协议就不要用三方。</div>
+</article>
+
+  <h2 id="compare">一张表看懂差异</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>维度</th>
+          <th>撮合 / 中介</th>
+          <th>转包 / 承揽</th>
+          <th>劳务派遣</th>
+          <th>平台用工（目标）</th>
+          <th>共同管理（风险变体）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>法律定性</td><td>民事中介；非劳动关系</td><td>民事承揽/外包；平台可能是雇主或支付方</td><td>劳动关系（派遣）</td><td>非劳动关系平台用工（第三类）</td><td>非劳动关系，但共同管理</td></tr><tr><td>谁签合同</td><td>客户↔零工；平台只签信息服务协议</td><td>客户↔平台；平台↔零工</td><td>派遣单位↔零工（劳动合同）；派遣单位↔客户</td><td>平台↔零工（书面用工协议）；客户↔平台</td><td>平台+客户+零工（三方书面用工协议）</td></tr><tr><td>谁付款</td><td>客户→零工；客户→平台服务费</td><td>客户→平台全额；平台→零工</td><td>客户→派遣单位；派遣单位→零工</td><td>客户→平台服务费；平台→零工任务包报酬</td><td>客户→平台；平台→零工</td></tr><tr><td>谁扣个税</td><td>客户（支付方）</td><td>平台（支付方/雇主）</td><td>派遣单位（工资薪金）</td><td>平台（劳务报酬；16号公告）</td><td>平台（劳务报酬）</td></tr><tr><td>谁缴社保</td><td>无雇主社保；零工可灵活就业自愿参保</td><td>平台（若雇人）；个体承揽无雇主社保但有穿透风险</td><td>派遣单位</td><td>无雇主社保；职业伤害保障</td><td>无雇主社保；职业伤害保障</td></tr><tr><td>发票</td><td>平台开服务费发票；零工开票/平台代办</td><td>平台开全额服务发票；平台取得零工发票/代办</td><td>派遣服务发票（差额5%部分不得开专票）</td><td>平台开平台服务发票；16号公告代办/零工开票</td><td>平台开服务发票</td></tr><tr><td>资质</td><td>职业中介→人力资源服务许可证；信息发布→备案</td><td>看业务；若实为派遣→派遣许可证</td><td>劳务派遣经营许可证</td><td>人力资源服务许可/备案；网络招聘→电信许可</td><td>平台+合作企业资质审核（第34条）</td></tr><tr><td>810/15报送</td><td>是（交易撮合平台）</td><td>若运营平台，通常是</td><td>若运营平台，通常是</td><td>是（灵活用工平台）</td><td>是</td></tr><tr><td>主要风险</td><td>平台控制过深→转包/派遣；第53条；二清；未扣缴</td><td>假外包真派遣（27条）；94条连带；社保穿透；虚开</td><td>10%比例、三性、连带责任、许可</td><td>客户管人→共同管理/派遣；平台支配→劳动关系；第36条；22号公告</td><td>共同被告（第41条）；连带；第34条监督责任；第36条穿透</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="summary">
+    <h2>五句话记住</h2>
+    <ol>
+      <li><strong>撮合</strong>：平台不签合同、不碰钱、不管人，只收佣金；但推送、结算、评价可能触发第53条。</li>
+      <li><strong>转包</strong>：平台是承包方，收全额、开全额票；可能是雇主，也可能只是支付方；客户管人就变派遣。</li>
+      <li><strong>派遣</strong>：平台是雇主，要许可证、三性、10%；最重，不适合“平台不是雇主”的定位。</li>
+      <li><strong>平台用工（目标）</strong>：平台签书面用工协议，但不是劳动合同；平台不是雇主，但承担平台义务；客户不管人。</li>
+      <li><strong>共同管理</strong>：三方协议不是免责协议；共同管理＝共同被告/连带风险；能用两方协议就不要用三方。</li>
+    </ol>
+  </div>
+
+  <div class="sources">
+    <strong>依据与说明：</strong>本页为内部研究稿，非法律/税务意见。主要依据：《新就业形态劳动者权益保障办法（征求意见稿）》第3、31、34、36条（2026-10-08 发布，未生效）；《民法典》第919、961、963、770、772、779条；《劳动合同法》第57–67、94条；《劳务派遣暂行规定》第3、4、5、27条；国务院令第810号；税总2025年第15、16、22号公告；财政部 税务总局2026年第28号公告；财税〔2016〕47号。正式对外前需律师与主管税务机关复核。<br>
+    官方原文：<a href="https://www.mohrss.gov.cn/SYrlzyhshbzb/zcfg/SYzhengqiuyijian/zq_fgs/202610/t20261008_585156.html" target="_blank">人社部《新就业形态劳动者权益保障办法（征求意见稿）》</a>
+  </div>
+
+</div>
+
+</body>
+</html>
